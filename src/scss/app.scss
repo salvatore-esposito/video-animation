@@ -1,0 +1,53 @@
+@import 'variables';
+@import 'mixins';
+
+#video-background {
+  position:relative;
+  width:$video_dimension;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+#video-background > .video-background__video {
+  position: relative;
+  display: block;
+  width: $base_width;
+  z-index: -100 + $video_z_index;
+}
+
+#video-background > .video-background__opacity {
+  position:absolute;
+  @include position(0);
+  width: $base_width;
+  z-index: $video_z_index;
+}
+
+#video-background > .video-background__text {
+  position:absolute;
+  color: white;
+  text-align: center;;
+  text-transform: uppercase;
+  width: $base_width;
+  top: 50%;
+  opacity: 0;
+  transform: translateY(-50%);
+  z-index: $video_z_index + 1;
+
+  & > span{
+      display: inline-block;
+      position: relative;
+      margin:0 auto;
+      width: $base_width/2;
+
+      &:after {
+        display: block;
+          content: "";
+          position: absolute;
+          background-color: black;
+          @include position(-3em, 5em, -3em, 5em);
+          z-index: -1000;
+          opacity: 0.5;
+          border-radius: 5px;
+      }
+  }
+}

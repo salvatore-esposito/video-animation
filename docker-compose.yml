@@ -1,0 +1,31 @@
+version: "3.3"
+
+services:
+  webapp:
+    build:
+      context: .
+      args:
+        user: ${USER}
+    image: salvio/js-starter-kit
+    container_name: js-laravel-mix-starter-kit
+    env_file: .docker-env
+    volumes:
+      - $PWD/src:/home/${USER}/src
+      - $PWD/dist:/home/${USER}/dist
+      - $PWD/index.html:/home/${USER}/index.html
+      - $PWD/package.json:/home/${USER}/package.json
+      - $PWD/webpack.mix.js:/home/${USER}/webpack.mix.js
+    ports:
+      - '3000:3000'
+      - '3001:3001'
+    networks:
+      jlmsk_net:
+        ipv4_address: 192.28.1.1
+    command: npm run watch-poll
+
+networks:
+    jlmsk_net:
+        ipam:
+            driver: default
+            config:
+                - subnet: 192.28.0.0/16

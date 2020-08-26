@@ -1,0 +1,13 @@
+@mixin position($squares...) {
+    $positions : ('top', 'right', 'bottom', 'left');
+    @if length($squares) == 1 {
+      @for $i from 0 to length($positions) {
+        #{nth($positions, $i + 1)} : #{nth($squares, 1)};
+      }
+    }
+    @else {
+      @for $i from 0 to length($squares) {
+        #{nth($positions, $i + 1)} : #{nth($squares, $i + 1)};
+      }
+    }
+}
